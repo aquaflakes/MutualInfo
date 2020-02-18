@@ -14,6 +14,14 @@ recoverDf_from_return_list <- function(returnList)
   rearr_list %>% as.data.frame()
 }
 
+#' Get the counts from 2 vectors
+#'
+#' @param V1 A vector.
+#' @param V2 A vector.
+#' @param pseudo An integer.
+#' @return calculate the joint distributions of \code{V1} and \code{V2} with \code{pseudo} as the pseudo counts
+#' @examples
+#' ic_get_2vect_cnt_table (c("3","2","1"),c("3","2","1"),5)
 ic_get_2vect_cnt_table <- function(V1,V2,pseudo)
 {
   counts=  ( data.table(V1,V2) %>% .[,.N,by=list(V1,V2)] %>% with(., xtabs(N~V1+V2)) ) + pseudo
