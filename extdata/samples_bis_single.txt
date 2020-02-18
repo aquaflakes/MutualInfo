@@ -1,3 +1,0 @@
-FileName	SampleName
-bis_1_1.fa.bz2	Sample1
-

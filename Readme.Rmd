@@ -8,13 +8,28 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# Mutual Infomation Calculation for SELEX
+<br><br><br>
+
+* [Introduction](#intro)
+* [Prerequisite](#prereq)
+* [Input data](#input)
+* [Calculate mutual infomation](#calc)
+* [Visualization](#plot)
+  + [2D plot](#map2d)
+  + [1D plot](#map1d)
+
+-----------------------------
+
+<a name="intro"></a>
 
 ## Introduction
 
 To footprint the binding of transcription factors on DNA, the traditional motif mapping analysis requires previously curated motifs, and is limited to profile only 1 motif at a time. To overcome such issues, this package provides the implementation of the mutual-infomation based footprint analysis for transcription factors. 
 
 Check also <https://www.nature.com/articles/s41586-018-0549-5> for details on how to use.
-
+<br><br>
+<a name="prereq"></a>
 
 ## Prerequisit
 To use the functions in this package. Please note that the package **fjComm** needs to be installed before hand. There is an `install_github` function to install R packages hosted on GitHub in the **devtools** package. It requests developer’s name.:
@@ -22,20 +37,54 @@ To use the functions in this package. Please note that the package **fjComm** ne
 ```{r install pkg, eval=FALSE, include=TRUE}
 install_github("aquaflakes/fjComm")
 ```
+<br><br>
+<a name="input"></a>
 
 ## Input data requirement
 The input data needs to be stored in a dataframe with only 1 column, each row corresponds to one sequence from the illumina sequencing. The data frame look like follows:
 ```{r input, echo=FALSE}
 c("ACTACTATCTATTCTATCATTACTACTACATATCAT","ACTACTATCTATTCTATCATTACTACTACATATCAT","ACTACTATCTATTCTATCATTACTACTACATATCAT","ACTACTATCTATTCTATCATTACTACTACATATCAT","ACTACTATCTATTCTATCATTACTACTACATATCAT") %>% as.data.frame()
 ```
-
+<br><br>
+<a name="calc"></a>
 
 ## Calculate Mutual Infomation
 
-You can also embed plots, for example:
+Use the following command to perform calculation of the mutual infomation and generate a data frame, only the first few rows were displayed :
+```{r calc, eval=FALSE, echo=TRUE}
+df= ic_related_calc (input_seq, kmerLen=2L, filter_for_spacing=TRUE, spacing=0, verbose=F, pseudo=10L, type="maxBias", maxBias_dimer_Params=list(type="topMI",topNo=5L) ) 
+```
+The generated data frame contains 6 columns
+```{r df, echo=FALSE, message=FALSE}
+df=read_csv("extdata/MI_calc_data_RFX.csv")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+head(df)
+```
+<br><br>
+<a name="plot"></a>
+
+## Plots to Visualize Mutual Infomation
+This package also provides ready-made functions to aid the visualization of necessary infomations. There are two basic way to visualize the data:<br><br>
+<a name="map2d"></a>
+
+> 2D Heat Map for All Positional Combinations
+
+To visualize all infomation contained in the dataframe, we can plot a 2-dimensional heatmap. This provide a quick overview for the whole dataset.
+```{r heat2d, echo=TRUE, message=FALSE, fig.width=4.5, fig.height=3.5,warning=FALSE}
+fjComm::gg_heat2D_MI(df, grad_colors = fjComm::gg_steelblue_red)
+```
+<br><br><br>
+
+<a name="map1d"></a>
+
+> 1D Heat Map for Neighbouring Positions 
+
+As TFs in general do not bind across a large span of DNA. For most of the cases, the mutual infomation between the neighbouring positions are the strongest. Therefore, most infomations are already contained by visualizing the diagnal of the 2D plot.
+```{r heat1d, echo=TRUE, message=FALSE, fig.width=4.5, fig.height=0.8, warning=FALSE}
+fjComm::gg_heat2D_diag(df, grad_colors = fjComm::gg_steelblue_red)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+------------
+**For more instructions about individual functions, please read the help documents under<br> <https://github.com/aquaflakes/MutualInfo/man>**<br>
+Fangjie Zhu<br>
+2020-02-18
