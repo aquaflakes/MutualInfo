@@ -1,0 +1,4 @@
+useDynLib(fjComm)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+import(ggplot2)

@@ -1,0 +1,25 @@
+Package: MIcalc
+Type: Package
+Title: Calculates the mutual infomation for all position pairs for the SELEX reads
+Version: 1.0
+Date: 2020-02-18
+Author: Fangjie Zhu
+Maintainer: Fangjie Zhu <fz262@cam.ac.uk>
+Description: To footprint the binding of transcription factors on DNA, the traditional motif mapping analysis requires previously curated motifs, and is limited to profile only 1 motif at a time. To overcome such issues, this package provides the implementation of the mutual-infomation based footprint analysis for transcription factors.
+License: GPL (>= 2)
+Depends:
+    fjComm,
+    pacman,
+    tidyverse,
+    ggplot2,
+    readr,
+    reshape2,
+    magrittr,
+    dplyr,
+    stringr
+Imports:
+    Rcpp,
+    ggplot2,reshape2,dplyr,data.table,
+    stringr
+LinkingTo: Rcpp,RcppArmadillo
+RoxygenNote: 7.0.2

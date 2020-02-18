@@ -1,0 +1,20 @@
+reads.FileName1	/Users/zhu/Nut_zhuData/lib/Rlib/PKG/fjComm/extdata/chip_1_1.fq.bz2
+reads.FileName2	NA
+reads.md5subsum1	653105d10a200f5663ceb174027e4eb9
+reads.md5subsum2	NA
+samplesFormat	fastq
+genome	BSgenome.Hsapiens.UCSC.hg19.masked
+genome.md5	NA
+genomeFormat	BSgenome
+aux	NA
+aux.md5	NA
+aligner	Rbowtie
+aligner.version	1.16.0
+maxHits	1
+paired	no
+splicedAlignment	FALSE
+snpFile	NA
+snpFile.md5	NA
+bisulfite	no
+alignmentParameter	-m 1 --best --strata
+QuasR.version	1.16.0
